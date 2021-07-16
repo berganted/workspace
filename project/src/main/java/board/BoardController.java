@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,12 +34,14 @@ public class BoardController {
 		return "/board/detail";
 	}
 	@RequestMapping("/board/write.do")
-	public String write() {
+	public String write(BoardVo vo , Model model,HttpSession sess ) {
+		
 		return "/board/write";
 	}
 	@RequestMapping("/board/insert.do")
-	public String insert(Model model , BoardVo vo, @RequestParam("filename") MultipartFile filename, HttpServletRequest req , HttpServletResponse res) {
+	public String insert(Model model , BoardVo vo, @RequestParam("filename") MultipartFile filename, HttpServletRequest req , HttpServletResponse res,HttpSession sess) {
 			//service.insert(vo);
+		  
 			if(!filename.isEmpty()) {
 				try {
 				String org = filename.getOriginalFilename();//원본 파일명

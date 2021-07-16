@@ -28,7 +28,7 @@ public class NewsServiceimpl implements NewsService {
 	@Override
 	public NewsVo detail(NewsVo vo) {
 		dao.updateReadCount(vo);
-		return dao.detail(vo);
+		return dao.detail(vo);  
 	}
 	@Override
 	public NewsVo edit(NewsVo vo) {

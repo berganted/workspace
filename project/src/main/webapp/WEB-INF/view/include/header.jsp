@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -18,8 +19,15 @@
             <div class="size">
                 <div><img src="/project/img/logo.png"></div>
                 <div class="login">
-                    <a href="">로그인</a> |
-                    <a href="">회원가입</a>
+	                <c:if test="${empty userInfo}">
+	                    	<a href="/project/user/login.do">로그인</a> |
+	                    	<a href="">회원가입</a>
+	                  </c:if>
+	                  <c:if test="${!empty userInfo}">
+					 		${ memberInfo.name}
+							<button onclick="location.href='/project/user/logout.do'">로그아웃</button> 
+							<button onclick="location.href='/project/user/mypage.do?${userInfo.no}'">내가 쓴 글</button> 
+					</c:if>
                 </div>
             </div>
         </div>

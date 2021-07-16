@@ -1,13 +1,4 @@
-<script type="text/javascript">
-	$(function(){
-		 var h = ($(window).height()-$(".divPop").height())/2+$(window).scrollTop();
-         var w = ($(window).width()-$(".divPop").width())/2+$(window).scrollLeft();
-         $(".divPop").css({
-             "top":h+"px",
-             "left":w+"px"
-         });
-	}
-</script>
+
 <body>
 		
 	<div class="quickMenu">

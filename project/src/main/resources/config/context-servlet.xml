@@ -13,7 +13,7 @@
 
 
    <!-- 컴포넌트 스캔 -->
-   <context:component-scan base-package="board , news, admin, book"/>
+   <context:component-scan base-package="board , news, admin, book, user"/>
    
    <!-- 어노테이션 활성화 -->
    <mvc:annotation-driven/>
@@ -58,4 +58,16 @@
    		<!-- 최대업로드사이즈(바이트 단위) -->
    		<property name="maxUploadSize" value="167772160"/>
    </bean>
+   
+   <mvc:interceptors>
+   		<mvc:interceptor>
+   				<mvc:mapping path="/board/write.do"/>
+   				<mvc:mapping path="/board/edit.do"/>
+   				<mvc:mapping path="/board/delete.do"/>
+   				<mvc:mapping path="/board/update.do"/>
+   				<mvc:mapping path="/user/mypage.do"/>
+   				
+   				<bean class="intercepter.LoginIntercepter"/>
+   		</mvc:interceptor>
+   </mvc:interceptors>
 </beans>

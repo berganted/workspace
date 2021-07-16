@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -41,8 +41,10 @@
                                     
                         <div class="btnSet clear">
                             <div class="fl_l"><a href='index.do?reqPage=${param.reqPage }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}' class="btn">목록으로</a></div>
+							<c:if test="${userInfo.no == vo.user_no }">
 							<div class="fl_l"><a href='edit.do?no=${boardVo.no }' class="btn">수정</a></div>                            
-							<div class="fl_l"><a href='javascript:isDel()' class="btn">삭제</a></div>                            
+							<div class="fl_l"><a href='javascript:isDel()' class="btn">삭제</a></div> 
+							</c:if>                           
                         </div>
                 
                     </div>

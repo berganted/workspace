@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,12 +11,20 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
     <jsp:include page="../include/head.jsp"/>
     <title>게시판 등록</title>
     <script type="text/javascript">
     	function goSave() {
+    		oEditors.getById['content'].exec("UPDATE_CONTENTS_FIELD",[]);
 			$("#frm").submit();
 		}
+    	var oEditors;
+    	$(function(){
+    		oEditors = setEditor("content");
+    		
+    	});
+    	
     </script>
 </head>
 <body>
@@ -27,6 +36,7 @@
     
                 <div class="bbs">
                 <form method="post" name="frm" id="frm" action="insert.do" enctype="multipart/form-data" ><!-- 파일전송하려면 이폼이 꼭필요 method="post" enctype="multipart/form-data" -->
+                                    <input type="hidden" name="user_no" value="${userInfo.no }">
                     <table class="board_write">
                         <tbody>
                         <tr>
@@ -40,7 +50,7 @@
                             <td>
                             
                             
-                                <textarea name="content" id="content"></textarea>
+                                <textarea name="content" id="content" style="width: 100%"></textarea>
                             </td>
                         </tr>
                         <tr>

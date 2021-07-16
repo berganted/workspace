@@ -12,7 +12,16 @@
     <meta name="description" content="">
     <jsp:include page="../include/head.jsp"/>
     <title>게시판목록</title>
-    
+	<script type="text/javascript">
+			function move() {
+			<c:if test="${!empty userInfo}">
+			location.href='write.do';
+			</c:if>
+			<c:if test="${empty userInfo}">
+			alert('로그인 후 사용가능합니다');
+			</c:if>
+			}
+	</script>    
 </head>
 
 <body>
@@ -47,7 +56,7 @@
 							<tr>
 								<td>${list.no }</td>
 								<td><a href="detail.do?no=${list.no }&reqPage=${boardVo.reqPage }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}">${list.title }</a></td>
-								<td></td>
+								<td>${list.name }</td>
 								<td>${list.date2 }</td>
 								<td>${list.readcount }</td>
 							</tr>
@@ -56,7 +65,7 @@
                         </tbody>
                     </table>
                     <div class="btnSet"  style="text-align:right;">
-                        <a class="btn" href="write.do">글작성 </a>
+                        <a class="btn" href="javascript:move();">글작성 </a>
                     </div>
                     <div class="pagenate clear">
                         <ul class='paging'>

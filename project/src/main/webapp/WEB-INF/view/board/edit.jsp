@@ -14,8 +14,14 @@
     <title>게시판 등록</title>
     <script type="text/javascript">
     	function goSave() {
+    		oEditors.getById['content'].exec("UPDATE_CONTENTS_FIELD",[]);
 			$("#frm").submit();
 		}
+    	var oEditors;
+    	$(function(){
+    		oEditors = setEditor("content");
+    		
+    	});
     </script>
 </head>
 <body>

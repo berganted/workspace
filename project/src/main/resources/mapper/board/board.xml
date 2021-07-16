@@ -13,11 +13,14 @@
 						${stype} LIKE '%${sval}%'
 					</if>	
 				</if>
+				<if test="user_no != 0">
+					AND user_no=#{user_no}
+				</if>
 			</where>
 		</sql>
 		
 		<select id="selectAll" resultType="board.BoardVo" parameterType="board.BoardVo">
-			SELECT * FROM board 
+			SELECT *,(SELECT name FROM user WHERE no=board.user_no ) as name FROM board 
 			<include refid="boardWhere"/>
 			ORDER BY ${orderby} ${direct}			
 			LIMIT ${strIdx},${pageRow} 
@@ -36,8 +39,8 @@
 			UPDATE board set readcount = readcount+1 where no = #{no} <!-- 조회수  -->
 		</update>
 		<insert id="insert" parameterType="board.BoardVo">
-			INSERT INTO board ( title , content, regdate ,readcount, filename_org, filename_real) 
-			VALUES(#{title}, #{content}, Now(), 0, #{filename_org}, #{filename_real})
+			INSERT INTO board ( title , content, regdate ,readcount, filename_org, filename_real,user_no) 
+			VALUES(#{title}, #{content}, Now(), 0, #{filename_org}, #{filename_real},#{user_no})
 		</insert>
 		<update id="update" parameterType="board.BoardVo">
 			UPDATE board SET
