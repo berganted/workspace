@@ -1,52 +1,30 @@
-package board;
+package comment;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import util.CommonVo;
 
-public class BoardVo extends CommonVo {
-	
-	
-	
-	private int no;
-	private String title;
+public class CommentVo extends CommonVo {
+	private int no ; 
 	private String content;
 	private Timestamp regdate;
-	private int readcount;
+	private int board_no;
 	private int user_no;
+	private String tablename;
 	private String name;
-	private int rcnt;
 	
-	public int getRcnt() {
-		return rcnt;
-	}
-	public void setRcnt(int rcnt) {
-		this.rcnt = rcnt;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getUser_no() {
-		return user_no;
-	}
-	public void setUser_no(int user_no) {
-		this.user_no = user_no;
-	}
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
 	}
 	public String getContent() {
 		return content;
@@ -60,14 +38,29 @@ public class BoardVo extends CommonVo {
 	public void setRegdate(Timestamp regdate) {
 		this.regdate = regdate;
 	}
-	public int getReadcount() {
-		return readcount;
+	public int getBoard_no() {
+		return board_no;
 	}
-	public void setReadcount(int readcount) {
-		this.readcount = readcount;
+	public void setBoard_no(int board_no) {
+		this.board_no = board_no;
+	}
+	public int getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
+	public String getTablename() {
+		return tablename;
+	}
+	public void setTablename(String tablename) {
+		this.tablename = tablename;
 	}
 	public String getDate2() {
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(regdate);
 	}
+	
+	
+
 }

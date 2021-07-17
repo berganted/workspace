@@ -20,7 +20,8 @@
 		</sql>
 		
 		<select id="selectAll" resultType="board.BoardVo" parameterType="board.BoardVo">
-			SELECT *,(SELECT name FROM user WHERE no=board.user_no ) as name FROM board 
+			SELECT *,(SELECT name FROM user WHERE no=board.user_no ) as name,
+			(SELECT count(*) from comment WHERE board_no=board.no) as rcnt FROM board 
 			<include refid="boardWhere"/>
 			ORDER BY ${orderby} ${direct}			
 			LIMIT ${strIdx},${pageRow} 

@@ -12,16 +12,6 @@
     <meta name="description" content="">
     <jsp:include page="../include/head.jsp"/>
     <title>게시판목록</title>
-	<script type="text/javascript">
-			function move() {
-			<c:if test="${!empty userInfo}">
-			location.href='write.do';
-			</c:if>
-			<c:if test="${empty userInfo}">
-			alert('로그인 후 사용가능합니다');
-			</c:if>
-			}
-	</script>    
 </head>
 
 <body>
@@ -29,7 +19,7 @@
       <jsp:include page="../include/header.jsp"/>
         <div class="sub">
             <div class="size">
-                <h3 class="sub_title">게시판</h3>
+                <h3 class="sub_title">내가 쓴 글</h3>
     
                 <div class="bbs">
                     <table class="list">
@@ -55,7 +45,7 @@
 							<c:forEach var="list" items="${list }">
 							<tr>
 								<td>${list.no }</td>
-								<td><a href="detail.do?no=${list.no }&reqPage=${boardVo.reqPage }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}">${list.title }</a><span style="font-size: 10px">[${list.rcnt }]</span></td>
+								<td><a href="/project/board/detail.do?no=${list.no }&reqPage=${boardVo.reqPage }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}">${list.title }</a></td>
 								<td>${list.name }</td>
 								<td>${list.date2 }</td>
 								<td>${list.readcount }</td>
@@ -64,16 +54,13 @@
                          
                         </tbody>
                     </table>
-                    <div class="btnSet"  style="text-align:right;">
-                        <a class="btn" href="javascript:move();">글작성 </a>
-                    </div>
                     <div class="pagenate clear">
                         <ul class='paging'>
-                        	<c:if test="${boardVo.strPage > boardVo.pageRange}"><li><a href="index.do?reqPage=${boardVo.strPage-1 }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}"><</a></li></c:if>
+                        	<c:if test="${boardVo.strPage > boardVo.pageRange}"><li><a href="mypage.do?reqPage=${boardVo.strPage-1 }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}"><</a></li></c:if>
                        	<c:forEach var="rp" begin="${boardVo.strPage }" end="${boardVo.endPage }">
-                            <li><a href='index.do?reqPage=${rp }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}' <c:if test="${rp==boardVo.reqPage }">class='current'</c:if>>${rp}</a></li>
+                            <li><a href='mypage.do?reqPage=${rp }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}' <c:if test="${rp==boardVo.reqPage }">class='current'</c:if>>${rp}</a></li>
                         </c:forEach>
-                          	<c:if test="${boardVo.totPage > boardVo.endPage}"><li><a href="index.do?reqPage=${boardVo.endPage+1 }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}">></a></li></c:if>      
+                          	<c:if test="${boardVo.totPage > boardVo.endPage}"><li><a href="mypage.do?reqPage=${boardVo.endPage+1 }&stype=${param.stype}&sval=${param.sval}&orderby=${param.orderby}&direct=${param.direct}">></a></li></c:if>      
                         </ul> 
                     </div>
                 

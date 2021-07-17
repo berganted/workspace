@@ -11,8 +11,57 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <jsp:include page="../include/head.jsp"/>
+    <style>
+    .comment_c{text-align: left;}
+    </style>
     <title>게시판 상세</title>
-    
+<script>
+$(function(){
+	getComment();
+})
+function getComment(reqPage){
+	$.ajax({
+		url:'/project/comment/list.do',
+		data:{board_no:${vo.no},
+			 reqPage:reqPage
+			},
+		success:function(res){
+			$('#commentArea').html(res);
+		}
+	})
+}
+function goSave(){
+	<c:if test="${!empty userInfo}">
+	if($('#content').val().trim()==''){
+		alert('내용을 입력해주세요')
+	}else{
+		if(confirm('댓글을 등록하시겠습니까?')){
+	$.ajax({
+		url:'/project/comment/insert.do',
+		data:{
+			content:$('#content').val(),
+			board_no:${vo.no},
+			user_no:${userInfo.no}
+		},
+		success:function(res){
+			if(res.trim()=='true'){
+				alert('댓글이 등록되었습니다.');
+				$('#content').val("");
+				getComment(1);
+			}else{
+				alert('댓글 등록 실패');
+			}
+		}
+	})
+		}
+	}
+	</c:if>
+	<c:if test="${empty userInfo}">
+		alert("로그인후 사용가능");
+	</c:if>
+}
+
+</script>
 </head>
 <body>
     <div class="wrap">
@@ -46,8 +95,31 @@
 							<div class="fl_l"><a href='javascript:isDel()' class="btn">삭제</a></div> 
 							</c:if>                           
                         </div>
-                
                     </div>
+                    <table class="board_write">
+                     <colgroup>
+                            <col width="*" />
+                            <col width="80px" />
+                          
+                        </colgroup>
+                        <tbody>
+                        
+                        <tr>
+                            
+                            <td>
+                                <textarea name="content" id="content" style="width: 100%;height:80px"></textarea>
+                            </td>
+                            <td>
+                            	<div class="btnSet"  style="text-align:right;">
+                        		<a class="btn" href="javascript:goSave();">저장 </a>
+                    			</div>
+                            </td>
+                        </tr>
+                       
+                        </tbody>
+                    </table>
+                    
+                    <div id="commentArea"></div>
                 </div>
             </div>
         </div>
@@ -59,7 +131,7 @@
 			if(confirm('삭제하시겠습니까?')){
 				//삭제
 				$.ajax({
-					url:'delete.do',
+					url:'comment/delete.do',
 					data:{
 						'no':${vo.no}
 					},
@@ -68,6 +140,26 @@
 						if (res.trim()=='true'){
 							alert("정상적으로 삭제되었습니다.");
 							location.href='index.do';
+						}else{
+							alert('삭제 실패');
+						}
+					}
+				});
+			}
+		}
+    	function isDelc(no) {
+			if(confirm('삭제하시겠습니까?')){
+				//삭제
+				$.ajax({
+					url:'/project/comment/delete.do',
+					data:{
+						no:no
+					},
+					method:'post',
+					success:function(res){
+						if (res.trim()=='true'){
+							alert("정상적으로 삭제되었습니다.");
+							getComment(1);
 						}else{
 							alert('삭제 실패');
 						}

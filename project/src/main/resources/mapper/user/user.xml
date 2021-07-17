@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="user">
+	
+		<sql id="userWhere">
+		<where>
+				<if test="sval != null and sval !=''">
+					<if test="stype == 'all'">
+					 	id LIKE '%${sval}%' OR name LIKE '%${sval}%'
+					</if>
+					<if test="stype != 'all'">
+						${stype} LIKE '%${sval}%'
+					</if>	
+				</if>
+			</where>
+		</sql>
+		
+		<select id="selectAll" resultType="user.UserVo" parameterType="user.UserVo">
+				SELECT *,(SELECT name FROM user WHERE no=board.user_no ) as name FROM board WHERE user_no=#{user_no}
+			<include refid="userWhere"/>
+			ORDER BY ${orderby} ${direct}			
+			LIMIT ${strIdx},${pageRow} 
+		</select>
+		
+		<select id="count" resultType="int" parameterType="user.UserVo">
+			SELECT COUNT(*) FROM user
+				<include refid="userWhere"/>
+		</select>
+		
+	 	<select id="detail" resultType="user.UserVo" parameterType="user.UserVo" >
+			SELECT * FROM user where no= #{no}
+		</select>
+		
+	
+		<insert id="insert" parameterType="user.UserVo">
+			INSERT INTO user ( id,pwd,name,email,tel,zipcode,addr1,addr2,regdate) 
+			VALUES( #{id}, md5(#{pwd}),#{name},#{email},#{tel},#{zipcode},#{addr1},#{addr2}, Now() )
+		</insert>
+		<update id="update" parameterType="user.UserVo">
+			UPDATE user SET
+				pwd=md5(#{pwd}),email=#{email}
+				,tel=#{tel},zipcode=#{zipcode}
+				,addr1=#{addr1},addr2=#{addr2}
+				
+			WHERE no=#{no}
+		</update>	
+		
+		<delete id="delete" parameterType="user.UserVo">
+			DELETE FROM user WHERE no=#{no}
+		</delete>	
+		
+		<select id="join" parameterType="String">
+		
+		</select>
+		
+		<select id="isDuplicateld" resultType="int" parameterType="user.UserVo">
+			SELECT count(*) from user WHERE id=#{id}
+		</select>
+		<select id="login"  resultType="user.UserVo" parameterType="user.UserVo">
+			SELECT *FROM user WHERE id=#{id} AND pwd=md5(#{pwd})
+		</select>
+		<select id="searchId" resultType="user.UserVo" parameterType="user.UserVo">
+			SELECT * FROM user WHERE name=#{name} AND email=#{email}
+		</select>
+		
+		<select id="searchPwd" resultType="user.UserVo" parameterType="user.UserVo">
+			SELECT * FROM user WHERE id=#{id} AND email=#{email}
+		</select>
+		<update id="updateTempPwd" parameterType="user.UserVo" >
+			UPDATE user SET pwd = md5(#{pwd}) WHERE id=#{id} AND email=#{email}
+		</update>
+	</mapper>
