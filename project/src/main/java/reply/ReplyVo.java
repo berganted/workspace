@@ -1,11 +1,11 @@
-package board;
+package reply;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import util.CommonVo;
 
-public class BoardVo extends CommonVo {
+public class ReplyVo extends CommonVo {
 	
 	
 	
@@ -17,14 +17,10 @@ public class BoardVo extends CommonVo {
 	private int user_no;
 	private String name;
 	private int rcnt;
-	private int[] nos;
+	private int gno;
+	private int ono;
+	private int nested;
 	
-	public int[] getNos() {
-		return nos;
-	}
-	public void setNos(int[] nos) {
-		this.nos = nos;
-	}
 	public int getRcnt() {
 		return rcnt;
 	}
@@ -77,4 +73,23 @@ public class BoardVo extends CommonVo {
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(regdate);
 	}
+	public int getGno() {
+		return gno;
+	}
+	public void setGno(int gno) {
+		this.gno = gno;
+	}
+	public int getOno() {
+		return ono;
+	}
+	public void setOno(int ono) {
+		this.ono = ono;
+	}
+	public int getNested() {
+		return nested;
+	}
+	public void setNested(int nested) {
+		this.nested = nested;
+	}
+	
 }

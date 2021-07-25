@@ -59,5 +59,11 @@
 		<delete id="delete" parameterType="board.BoardVo">
 			DELETE FROM board WHERE no=#{no}
 		</delete>	
+		<delete id="deleteGroup" parameterType="board.BoardVo">
+			DELETE FROM board WHERE no IN 
+			<foreach collection="nos" index="index" item="no" open="(" close=")" separator=",">
+			#{no}
+			</foreach>
+		</delete>	
 		
 	</mapper>

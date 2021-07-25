@@ -9,5 +9,6 @@ public interface BoardService {
 	int insert(BoardVo vo);
 	BoardVo edit(BoardVo vo);
 	int update(BoardVo vo);
-	 int delete(BoardVo vo);
+	int delete(BoardVo vo);
+	int deleteGroup(BoardVo vo);
 }

@@ -1,4 +1,4 @@
-package board;
+package reply;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BoardServiceimpl implements BoardService {
+public class ReplyServiceimpl implements ReplyService {
 	@Autowired
-	BoardDao dao ;
+	ReplyDao dao ;
 	@Override
-	public List<BoardVo> selectAll(BoardVo vo) {
+	public List<ReplyVo> selectAll(ReplyVo vo) {
 		int totCount = dao.count(vo);	
 		int totPage = totCount/vo.getPageRow();
 		if(totCount % vo.getPageRow()>0) totPage++;
@@ -26,21 +26,25 @@ public class BoardServiceimpl implements BoardService {
 		return dao.selectAll(vo);
 	}
 	@Override
-	public BoardVo detail(BoardVo vo) {
+	public ReplyVo detail(ReplyVo vo) {
 		dao.updateReadCount(vo);
 		return dao.detail(vo);
 	}
 	@Override
-	public BoardVo edit(BoardVo vo) {
+	public ReplyVo edit(ReplyVo vo) {
 		return dao.detail(vo);
 	}
 	@Override
-	public int insert(BoardVo vo) {
-		return dao.insert(vo);
-		
+	public int insert(ReplyVo vo) {
+		if(dao.insert(vo) > 0) {
+			dao.gno(vo.getNo());
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 	@Override
-	public int update(BoardVo vo) {
+	public int update(ReplyVo vo) {
 		if("1".equals(vo.getIsDel())) {
 			dao.delFilename(vo);
 		}
@@ -48,13 +52,21 @@ public class BoardServiceimpl implements BoardService {
 		
 	}
 	@Override
-	public int delete(BoardVo vo) {
+	public int delete(ReplyVo vo) {
 		return dao.delete(vo);
 		 
 	}
 	@Override
-	public int deleteGroup(BoardVo vo) {
-		return dao.deleteGroup(vo);
+	public int insertReply(ReplyVo vo) {
+		dao.onoupdate(vo);
+		vo.setOno(vo.getOno()+1);
+		vo.setNested(vo.getNested()+1);
+		return dao.insertReply(vo);
 	}
+	@Override
+	public int onoupdate(ReplyVo vo) {
+		return dao.onoupdate(vo);
+	}
+	
 
 }

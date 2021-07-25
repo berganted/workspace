@@ -94,7 +94,7 @@
 .bbs .list{border-collapse:collapse; border-spacing:0; box-sizing:border-box;}  /* tr에 shadow_down 클래스 사용하는 경우 border-collapse:separate; 으로 변경*/
 .bbs .list thead{border-top:2px solid #221f1f; border-bottom:1px solid #221f1f;}
 .bbs .list thead th{padding:15px 20px; font-size:13px; height:20px; line-height:14px; color:#333;}
-.bbs .list td{text-align:center; padding:8px 10px; border-bottom:1px solid #d9d9d9;}
+.bbs .list td{ padding:8px 10px; border-bottom:1px solid #d9d9d9;}
 .bbs .list tbody tr:hover{background:#f6f6f6;} /*마우스오버 배경칼라지정*/
 .bbs .list .notice{background:#f9f9f9; } /*탑공지  배경칼라지정*/
 .bbs .list span.comment{color:#999; font-size:12px !important; font-weight:normal !important;} /*댓글수*/

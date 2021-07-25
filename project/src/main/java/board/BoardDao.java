@@ -36,4 +36,7 @@ public class BoardDao {
 	public int delete(BoardVo vo) {
 		return sessionTemplate.delete("board.delete", vo);
 	}
+	public int deleteGroup(BoardVo vo) {
+		return sessionTemplate.delete("board.deleteGroup", vo);
+	}
 }
