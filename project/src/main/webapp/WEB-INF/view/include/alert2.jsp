@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 	alert('${msg}');
-	window.history.back();
+	history.go(-2);
 </script>
