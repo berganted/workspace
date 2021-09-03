@@ -18,7 +18,13 @@ public class UserVo extends CommonVo {
 	private String addr2;
 	private Timestamp regdate;
 	private String CheckEmail;
+	
+	
+	
 	public int getNo() {
+		return no;
+	}
+	public int getUser_no() {
 		return no;
 	}
 	public void setNo(int no) {

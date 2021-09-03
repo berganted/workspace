@@ -1,6 +1,7 @@
 package junit5;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,13 @@ public class Test2 {
 	void test2() {
 		assumeTrue(1==2);
 		assertEquals("a", "a");
+	}
+	@Test
+	void count() {
+		int r=10;
+		assertTrue(r>0);
+		assertTrue(r<0);
+		
 	}
 	
 }

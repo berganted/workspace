@@ -51,7 +51,6 @@ public class AdminBoardController {
 	}
 	@RequestMapping("/admin/board/insert.do")
 	public String insert(Model model , BoardVo vo, @RequestParam("filename") MultipartFile filename, HttpServletRequest req , HttpServletResponse res,HttpSession sess) {
-			//service.insert(vo);
 		  
 			if(!filename.isEmpty()) {
 				try {
